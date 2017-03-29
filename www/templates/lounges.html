@@ -1,0 +1,19 @@
+<ion-view title="Lounges" id="page5" style="background-color:#E3E3E3;">
+  <ion-content padding="true" class="has-header">
+    <div class="row" ng-repeat="lounge in lounges">
+       <div class="col s12 m6">
+         <div class="card white lighten-5">
+           <div class="card-content black-text">
+             <span class="card-title">{{lounge.Names.Name[0].$}}</span>
+             <p>Standort: {{lounge.Locations.Location[0].$}}</p>
+               <p>Öffnungszeiten: {{lounge.OpeningHours.OpeningHours[0].$}}</p>
+           </div>
+           <div class="card-action">
+             <a ng-if="flight.FlightStatus.Code=='DP'" style="color:red">todo: badges</a>
+
+           </div>
+         </div>
+       </div>
+     </div>
+  </ion-content>
+</ion-view>

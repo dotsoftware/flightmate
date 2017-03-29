@@ -1,0 +1,30 @@
+<ion-side-menus enable-menu-with-back-views="false">
+  <ion-side-menu-content>
+    <ion-nav-bar class="bar-stable">
+      <ion-nav-back-button></ion-nav-back-button>
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-nav-view name="side-menu21"></ion-nav-view>
+  </ion-side-menu-content>
+  <ion-side-menu side="left" id="side-menu21">
+    <ion-header-bar class="bar-stable">
+      <div class="title" ui-sref="flughafenAirport.flughafenAuswHlen" menu-close="">Flughafen {{airport}}</div>
+    </ion-header-bar>
+    <ion-content padding="false" class="side-menu-left has-header ">
+      <ion-list id="flughafenAirport-list1">
+        <ion-item class="item-icon-left" id="flughafenAirport-list-item1" ui-sref="flughafenAirport.ankunft" menu-close="">
+          <i class="icon ion-ionic"></i>Ankünfte</ion-item>
+        <ion-item class="item-icon-left" id="flughafenAirport-list-item2" ui-sref="flughafenAirport.abflug" menu-close="">
+          <i class="icon ion-ionic"></i>Abflüge</ion-item>
+        <ion-item class="item-icon-left" id="flughafenAirport-list-item3" ui-sref="flughafenAirport.fluginformation" menu-close="">
+          <i class="icon ion-ionic"></i>Fluginformationen</ion-item>
+        <ion-item class="item-icon-left" id="flughafenAirport-list-item4" ui-sref="flughafenAirport.lounges" menu-close="">
+          <i class="icon ion-coffee"></i>Lounges</ion-item>
+        <ion-item class="item-icon-left" id="flughafenAirport-list-item21" ui-sref="flughafenAirport.verbindungSuchen" menu-close="">
+          <i class="icon ion-ionic"></i>Verbindung suchen</ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>
