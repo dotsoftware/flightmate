@@ -1,5 +1,28 @@
 angular.module('app.controllers', [])
 
+.filter("getAirline", function($http,FlightService){
+   return function(input){
+
+           return FlightService.getAirlineByID(input).Airline;
+
+    /*
+
+     $http.get("airline.json").success(function(data) {
+       console.log(data[input][0].Airline);
+       this.res = data[input][0].Airline;
+     })
+     .error(function(err) {
+       console.log(err.message);
+       return err.message;
+     });
+
+     console.log(this.res);
+     return res;
+   }*/
+   return "bla";
+ }
+})
+
 .controller('abflugCtrl', ['$scope', '$stateParams', '$filter', 'FlightService', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
@@ -19,11 +42,17 @@ function ($scope, $stateParams, $filter, FlightService) {
 
   FlightService.auth().success(function(data) {
 
+    /*FlightService.getAirlineByID("OS").success(function(data) {
+      console.log(data);
+    })
+    .error(function(error) {
+      console.log(error);
+    });*/
+
     FlightService.setAirport("VIE");
 
     var date = new Date();
-    console.log(date);
-    console.log(date | 'yyyy-MM-ddTHH:mm');
+
     console.log($filter('date')(date, "yyyy-MM-ddTHH:mm"));
 
     FlightService.getArrivals(FlightService.getAirport(), $filter('date')(date, "yyyy-MM-ddTHH:mm")).success(function(data) {

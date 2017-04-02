@@ -9,8 +9,10 @@
            <div class="card white lighten-5">
              <div class="card-content black-text">
                <span class="card-title">{{flight.Arrival.AirportCode}} ({{flight.MarketingCarrier.AirlineID}} {{flight.MarketingCarrier.FlightNumber}}) </span>
-               <p>Flugzeugtyp: {{flight.Equipment.AircraftCode}}</p>
+                 <p>Flugzeugtyp: {{flight.Equipment.AircraftCode}}</p>
                  <p>{{flight.Arrival.ScheduledTimeLocal.DateTime}}</p>
+                 <p>Operated by {{ flight.MarketingCarrier.AirlineID | getAirline }}</p>
+
              </div>
              <div class="card-action">
                <a ng-if="flight.FlightStatus.Code=='DP'" style="color:red">Status: {{flight.FlightStatus.Definition}}</a>

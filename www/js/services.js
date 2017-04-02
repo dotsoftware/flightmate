@@ -1,16 +1,52 @@
 angular.module('app.services', [])
 
-.factory('FlightService', function($http) {
+.factory('authInterceptor', function ($rootScope, $q, $window, FlightService) {
+  return {
+    request: function (config) {
+      config.headers = config.headers || {};
+      if ($window.sessionStorage.token) {
+        config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
+      }
+      return config;
+    },
+    response: function (response) {
+      if (response.status === 401) {
+        console.log("reauthenticating");
+
+        FlightService.auth().success(function(data) {
+          return deferred.promise.then(function() {
+              return $http(response.config);
+          });
+        });
+      }
+      return response || $q.when(response);
+    }
+  };
+})
+
+
+
+.factory('FlightService', function($http, $window) {
 
   var access_token;
   var client_id = "ypmd2w7dmmbeecdekft2f5t7";
   var client_secret = "Zn3zKQdZbH";
-  var currentAirport;
+  var airlines;
 
   var BASE_URL = "https://api.lufthansa.com/v1";
 
   // after receiving token, this is gonna be the new http.get header
   var auth_header;
+
+  function loadAirlines() {
+    console.log("lade airlines");
+    $http.get("airline.json").success(function(data) {
+      console.log(data);
+      airlines = data;
+    });
+  }
+
+  loadAirlines();
 
   function reAuth() {
     var config = {
@@ -25,6 +61,7 @@ angular.module('app.services', [])
   }
 
   var FlightService = {
+
 
 
     // https://api.lufthansa.com/v1/operations/flightstatus/OS351/2017-03-22
@@ -55,6 +92,8 @@ angular.module('app.services', [])
                 'Content-Type': 'application/x-www-form-urlencoded'
              }
            };
+
+        $window.sessionStorage.token = data.access_token;
 
         console.log("auth in service:");
         console.log(data);
@@ -103,17 +142,9 @@ angular.module('app.services', [])
 
     },
 
-    getNameByIATA: function(iata) {
-      $http.get(BASE_URL + "/references/airlines/" + iata + "?limit=20&offset=0", auth_header).success(function(data) {
-        console.log(data);
+    getAirlineByID: function(id) {
 
-        console.log(data.AirlineResource.Airlines.Airline.Names.Name.$);
-        alert(data.AirlineResource.Airlines.Airline.Names.Name.$);
-        return data.AirlineResource.Airlines.Airline.Names.Name.$;
-
-      }).catch(function(error) {
-        console.log(error);
-      })
+      return airlines[id][0];
     },
 
     getDepartures: function(from, datetime, limit) {
