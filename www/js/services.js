@@ -31,23 +31,39 @@ angular.module('app.services', [])
   var access_token;
   var client_id = "ypmd2w7dmmbeecdekft2f5t7";
   var client_secret = "Zn3zKQdZbH";
+
+  // preloaded data
   var airlines;
+  var airports;
 
   var BASE_URL = "https://api.lufthansa.com/v1";
 
   // after receiving token, this is gonna be the new http.get header
   var auth_header;
 
+  // load local json Airline names
   function loadAirlines() {
     console.log("lade airlines");
     $http.get("airline.json").success(function(data) {
-      console.log(data);
       airlines = data;
     });
   }
 
-  loadAirlines();
+  //load local json IATA Codes
+  function loadCityNames() {
 
+    $http.get("airports.json").success(function(data) {
+      console.log(data);
+      airports = data;
+
+      console.log(airports[0].name)
+    });
+  }
+
+  loadAirlines();
+  loadCityNames();
+
+  // reauthenticate if no token available
   function reAuth() {
     var config = {
          headers : {
@@ -61,13 +77,11 @@ angular.module('app.services', [])
   }
 
   var FlightService = {
-
-
-
     // https://api.lufthansa.com/v1/operations/flightstatus/OS351/2017-03-22
 
     // Build a request
     // https://{hostname} /{version} /{area} /{root resource name} [/{resource key}]  [/{sub-resource name} [/{sub-resource key}]* ][?{option_key}={option_value}]
+
 
     getToken: function() {
       return access_token;
@@ -145,6 +159,11 @@ angular.module('app.services', [])
     getAirlineByID: function(id) {
 
       return airlines[id][0];
+    },
+
+    getCityByCode: function(code) {
+      return airports.filter(
+        function(airports) { return airports.iata == code });
     },
 
     getDepartures: function(from, datetime, limit) {

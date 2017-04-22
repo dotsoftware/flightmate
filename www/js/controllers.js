@@ -23,6 +23,12 @@ angular.module('app.controllers', [])
  }
 })
 
+.filter("getAirportName", function($http, FlightService) {
+    return function(input){
+      return FlightService.getCityByCode(input)[0].name;
+  }
+})
+
 .controller('abflugCtrl', ['$scope', '$stateParams', '$filter', 'FlightService', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
@@ -35,53 +41,47 @@ function ($scope, $stateParams, $filter, FlightService) {
   })
 }])
 
-.controller('ankunftCtrl', ['$scope', '$stateParams', '$filter', 'FlightService', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('ankunftCtrl', ['$scope', '$stateParams', '$filter', '$ionicLoading', 'FlightService', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams, $filter, FlightService) {
+function ($scope, $stateParams, $filter, $ionicLoading, FlightService) {
 
-  FlightService.auth().success(function(data) {
-
-    /*FlightService.getAirlineByID("OS").success(function(data) {
-      console.log(data);
-    })
-    .error(function(error) {
-      console.log(error);
-    });*/
-
-    FlightService.setAirport("VIE");
-
-    var date = new Date();
-
-    console.log($filter('date')(date, "yyyy-MM-ddTHH:mm"));
-
-    FlightService.getArrivals(FlightService.getAirport(), $filter('date')(date, "yyyy-MM-ddTHH:mm")).success(function(data) {
-        console.log(data);
-        $scope.flights = data.FlightStatusResource.Flights.Flight;
-    });
+  $ionicLoading.show({
+   template: 'Authentifizierung läuft'
   });
 
+ FlightService.auth().success(function(data) {
+   FlightService.setAirport("VIE");
+   $ionicLoading.hide();
 
-  $scope.reload = function() {
-    FlightService.getArrivals("VIE" ,"2017-03-24T21:13").success(function(data) {
+   loadArrivals();
+ });
 
-      $scope.flights = data.FlightStatusResource.Flights.Flight;
+  function loadArrivals() {
+     var date = new Date();
 
-      console.log(data);
-    })
-    .catch(function(error) {
-      console.log(error);
-    });
+     console.log("lade ankunft");
+
+     FlightService.getArrivals(FlightService.getAirport(), $filter('date')(date, "yyyy-MM-ddTHH:mm")).success(function(data) {
+         console.log(data);
+         $scope.flights = data.FlightStatusResource.Flights.Flight;
+         $scope.$broadcast('scroll.refreshComplete');
+
+     });
+   }
+
+  $scope.refreshArrival = function() {
+    loadArrivals();
   }
 
 
 
 }])
 
-.controller('flughafenAirportCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('flughafenAirportCtrl', ['$scope', '$stateParams', '$ionicLoading', 'FlightService', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
+function ($scope, $stateParams, $ionicLoading, FlightService) {
 
 
 }])

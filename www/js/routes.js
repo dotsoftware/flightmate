@@ -2,36 +2,42 @@ angular.module('app.routes', [])
 
 .config(function($stateProvider, $urlRouterProvider) {
 
-  // Ionic uses AngularUI Router which uses the concept of states
-  // Learn more here: https://github.com/angular-ui/ui-router
-  // Set up the various states which the app can be in.
-  // Each state's controller can be found in controllers.js
+  function authenticate($location, FlightService) {
+    console.log("bin in auth");
+    console.log("token:" + FlightService.access_token);
+
+    if(!angular.isDefined(FlightService.getToken())) {
+      console.log("gehe zur startseite");
+      $location.path("/menu/arrival");
+    }
+  }
+
   $stateProvider
-
-
-
       .state('flughafenAirport.abflug', {
     url: '/departures',
     views: {
-      'side-menu21': {
+      'menu': {
         templateUrl: 'templates/abflug.html',
-        controller: 'abflugCtrl'
+        controller: 'abflugCtrl',
+        resolve: { authenticate: authenticate }
       }
     }
   })
 
+
   .state('flughafenAirport.ankunft', {
     url: '/arrival',
     views: {
-      'side-menu21': {
-        templateUrl: 'templates/ankunft.html',
-        controller: 'ankunftCtrl'
+      'menu': {
+        templateUrl: 'templates/ankunft_funky.html',
+        controller: 'ankunftCtrl',
+        resolve: { authenticate: authenticate }
       }
     }
   })
 
   .state('flughafenAirport', {
-    url: '/side-menu21',
+    url: '/menu',
     templateUrl: 'templates/flughafenAirport.html',
     controller: 'flughafenAirportCtrl'
   })
@@ -39,9 +45,10 @@ angular.module('app.routes', [])
   .state('flughafenAirport.fluginformation', {
     url: '/fight_info',
     views: {
-      'side-menu21': {
+      'menu': {
         templateUrl: 'templates/fluginformation.html',
-        controller: 'fluginformationCtrl'
+        controller: 'fluginformationCtrl',
+        resolve: { authenticate: authenticate }
       }
     }
   })
@@ -49,9 +56,10 @@ angular.module('app.routes', [])
   .state('flughafenAirport.lounges', {
     url: '/lounges',
     views: {
-      'side-menu21': {
+      'menu': {
         templateUrl: 'templates/lounges.html',
-        controller: 'loungesCtrl'
+        controller: 'loungesCtrl',
+        resolve: { authenticate: authenticate }
       }
     }
   })
@@ -59,9 +67,10 @@ angular.module('app.routes', [])
   .state('flughafenAirport.flughafenAuswHlen', {
     url: '/choose_airport',
     views: {
-      'side-menu21': {
+      'menu': {
         templateUrl: 'templates/flughafenAuswHlen.html',
-        controller: 'flughafenAuswHlenCtrl'
+        controller: 'flughafenAuswHlenCtrl',
+        resolve: { authenticate: authenticate }
       }
     }
   })
@@ -69,14 +78,16 @@ angular.module('app.routes', [])
   .state('flughafenAirport.verbindungSuchen', {
     url: '/findFlight',
     views: {
-      'side-menu21': {
+      'menu': {
         templateUrl: 'templates/verbindungSuchen.html',
-        controller: 'verbindungSuchenCtrl'
+        controller: 'verbindungSuchenCtrl',
+        resolve: { authenticate: authenticate }
       }
     }
   })
 
-$urlRouterProvider.otherwise('/side-menu21/arrival')
+$urlRouterProvider.otherwise('/menu/arrival')
+
 
 
 
