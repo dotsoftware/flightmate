@@ -66,10 +66,10 @@ function ($scope, $stateParams, $filter, FlightService) {
 
 }])
 
-.controller('ankunftCtrl', ['$scope', '$stateParams', '$filter', '$ionicLoading', 'FlightService', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('ankunftCtrl', ['$scope', '$stateParams', '$filter', '$ionicLoading', '$ionicFilterBar', 'FlightService', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams, $filter, $ionicLoading, FlightService) {
+function ($scope, $stateParams, $filter, $ionicLoading, $ionicFilterBar, FlightService) {
 
   $ionicLoading.show({
    template: 'Authentifizierung läuft'
@@ -95,6 +95,19 @@ function ($scope, $stateParams, $filter, $ionicLoading, FlightService) {
      });
    }
 
+   $scope.showFilterBar = function () {
+     console.log($scope.flights);
+     filterBarInstance = $ionicFilterBar.show({
+       items: $scope.flights,
+       filterProperties: [''], //restaurant Name
+       update: function (filteredItems, filterText) {
+         $scope.flights = filteredItems;
+         if (filterText) {
+           console.log(filterText);
+         }
+       }
+     });
+   };
 
   $scope.refreshArrival = function() {
     loadArrivals();

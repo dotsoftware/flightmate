@@ -16,7 +16,7 @@
               <p>Flugzeugtyp: {{flight.Equipment.AircraftCode}}</p>
               <p>Abflug: {{flight.Departure.ScheduledTimeLocal.DateTime | formatDate}}</p>
               <p>Avisierte Ankunft: {{flight.Arrival.ScheduledTimeLocal.DateTime | formatDate}}</p>
-              <p>Geplante Ankunft: {{flight.Arrival.EstimatedTimeLocal.DateTime | formatDate}}</p>
+              <p ng-if="flight.Arrival.EstimatedTimeLocal.DateTime.length > 0" style="color:red">Geplante Ankunft: {{flight.Arrival.EstimatedTimeLocal.DateTime | formatDate}}</p>
               <p>Operated by {{ flight.MarketingCarrier.AirlineID | getAirline }}</p>
 
             </div>
@@ -31,30 +31,6 @@
           </div>
         </div>
       </div>
-
-
-      <div class="row" ng-repeat="flight in flights">
-         <div class="col s12 m6">
-           <div class="card white lighten-5">
-             <div class="card-content black-text">
-               <span class="card-title">{{flight.Arrival.AirportCode}} ({{flight.MarketingCarrier.AirlineID}} {{flight.MarketingCarrier.FlightNumber}}) </span>
-                 <p>Flugzeugtyp: {{flight.Equipment.AircraftCode}}</p>
-                 <p>{{flight.Arrival.ScheduledTimeLocal.DateTime}}</p>
-                 <p>Operated by {{ flight.MarketingCarrier.AirlineID}}</p>
-
-             </div>
-             <div class="card-action">
-               <a ng-if="flight.FlightStatus.Code=='DP'" style="color:red">Status: {{flight.FlightStatus.Definition}}</a>
-               <a ng-if="flight.FlightStatus.Code=='OT'" style="color:green">Status: {{flight.FlightStatus.Definition}}</a>
-               <a ng-if="flight.FlightStatus.Code=='NO'" style="color:black">Status: {{flight.FlightStatus.Definition}}</a>
-               <a ng-if="flight.FlightStatus.Code=='LD'" style="color:green">Status: {{flight.FlightStatus.Definition}}</a>
-               <a ng-if="flight.FlightStatus.Code=='FE' || flight.FlightStatus.Code=='NI' || flight.FlightStatus.Code=='NA'" style="color:black">{{flight.FlightStatus.Definition}}</a>
-
-               <a href="#">Mehr Infos</a>
-             </div>
-           </div>
-         </div>
-       </div>
 
   </ion-content>
 </ion-view>

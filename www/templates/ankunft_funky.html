@@ -1,35 +1,36 @@
 <ion-view title="Ankunft" style="background-color:#E3E3E3;">
+
   <ion-content padding="true" class="has-header">
+
     <ion-refresher pulling-text="Aktualisieren" on-refresh="refreshArrival()">
    </ion-refresher>
 
-   <div class="col s12 m7">
-
-   <div class="card horizontal" ng-repeat="flight in flights" >
-     <div class="card-image">
-       <img src="img/flight.png">
-     </div>
-     <div class="card-stacked">
-       <div class="card-content ">
-
-         <strong><span class="card-title">{{flight.Departure.AirportCode | getAirportName }} ({{ flight.Departure.AirportCode }})</span></strong>
+   <div class="row" ng-repeat="flight in flights">
+     <div class="col s12 m7">
+       <div class="card">
+         <div class="card-image">
+           <img src="img/flight_wide.png">
+           <span class="card-title airportText">{{flight.Departure.AirportCode | getAirportName }} ({{ flight.Departure.AirportCode }})</span>
+         </div>
+         <div class="card-content">
+           <span class="card-title"></span>
            <p>Flugnummer: {{flight.MarketingCarrier.AirlineID}} {{flight.MarketingCarrier.FlightNumber}}</p>
            <p>Flugzeugtyp: {{flight.Equipment.AircraftCode}}</p>
            <p>Avisierte Ankunft: {{flight.Arrival.ScheduledTimeLocal.DateTime | formatDate }}</p>
-           <p ng-if="flight.Arrival.EstimatedTimeLocal.DateTime.length > 0" style="color:red">Geplante Ankunft: {{flight.Arrival.EstimatedTimeLocal.DateTime | formatDate }}</p>
+           <p ng-if="flight.Arrival.EstimatedTimeLocal.DateTime.length > 0">Geplante Ankunft: {{flight.Arrival.ScheduledTimeLocal.DateTime | formatDate }}</p>
            <p>Operated by {{ flight.MarketingCarrier.AirlineID | getAirline }}</p>
-       </div>
-       <div class="card-action">
-         <a ng-if="flight.FlightStatus.Code=='DP'" style="color:red">{{flight.FlightStatus.Definition}}</a>
-         <a ng-if="flight.FlightStatus.Code=='OT'" style="color:green">{{flight.FlightStatus.Definition}}</a>
-         <a ng-if="flight.FlightStatus.Code=='NO'" style="color:black">{{flight.FlightStatus.Definition}}</a>
-         <a ng-if="flight.FlightStatus.Code=='LD'" style="color:green">{{flight.FlightStatus.Definition}}</a>
-         <a ng-if="flight.FlightStatus.Code=='FE' || flight.FlightStatus.Code=='NI' || flight.FlightStatus.Code=='NA'" style="color:black">{{flight.FlightStatus.Definition}}</a>
-         <a href="#">Ursprungsland: {{ flight.Departure.AirportCode | getCountryNameByIATA }}</a>
-
+         </div>
+         <div class="card-action">
+           <a ng-if="flight.FlightStatus.Code=='DP'" style="color:red">{{flight.FlightStatus.Definition}}</a>
+           <a ng-if="flight.FlightStatus.Code=='OT'" style="color:green">{{flight.FlightStatus.Definition}}</a>
+           <a ng-if="flight.FlightStatus.Code=='NO'" style="color:black">{{flight.FlightStatus.Definition}}</a>
+           <a ng-if="flight.FlightStatus.Code=='LD'" style="color:green">{{flight.FlightStatus.Definition}}</a>
+           <a ng-if="flight.FlightStatus.Code=='FE' || flight.FlightStatus.Code=='NI' || flight.FlightStatus.Code=='NA'" style="color:black">{{flight.FlightStatus.Definition}}</a>
+           <a href="#">Zielland: {{ flight.Departure.AirportCode | getCountryNameByIATA }}</a>
+         </div>
        </div>
      </div>
    </div>
- </div>
+
   </ion-content>
 </ion-view>
