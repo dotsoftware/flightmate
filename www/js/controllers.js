@@ -3,29 +3,36 @@ angular.module('app.controllers', [])
 .filter("getAirline", function($http,FlightService){
    return function(input){
 
-           return FlightService.getAirlineByID(input).Airline;
-
-    /*
-
-     $http.get("airline.json").success(function(data) {
-       console.log(data[input][0].Airline);
-       this.res = data[input][0].Airline;
-     })
-     .error(function(err) {
-       console.log(err.message);
-       return err.message;
-     });
-
-     console.log(this.res);
-     return res;
-   }*/
-   return "bla";
+    return FlightService.getAirlineByID(input).Airline;
+   // return "bla";
  }
 })
 
 .filter("getAirportName", function($http, FlightService) {
     return function(input){
+  //    console.log(FlightService.getCityByCode(input)[0]);
       return FlightService.getCityByCode(input)[0].name;
+  }
+})
+
+.filter("getCountryNameByISO", function($http, FlightService) {
+  return function(input) {
+    console.log(FlightService.getCountryByISO(input));
+    return FlightService.getCountryByISO(input).Name;
+  }
+})
+
+.filter("getCountryNameByIATA", function($http, FlightService) {
+  return function(input) {
+    //console.log(FlightService.getCountryIsoByIATA(input));
+    return FlightService.getCountryIsoByIATA(input)[0].Name;
+  }
+})
+
+.filter("getCountryCodeByIATA", function($http, FlightService) {
+  return function(input) {
+    console.log(FlightService.getCountryIsoByIATA(input));
+    return FlightService.getCountryIsoByIATA(input)[0].Code;
   }
 })
 
@@ -70,12 +77,10 @@ function ($scope, $stateParams, $filter, $ionicLoading, FlightService) {
      });
    }
 
+  
   $scope.refreshArrival = function() {
     loadArrivals();
   }
-
-
-
 }])
 
 .controller('flughafenAirportCtrl', ['$scope', '$stateParams', '$ionicLoading', 'FlightService', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller

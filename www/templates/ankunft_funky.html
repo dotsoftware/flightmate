@@ -6,14 +6,16 @@
    <div class="col s12 m7">
 
    <div class="card horizontal" ng-repeat="flight in flights" >
-     <!--<div class="card-image">
-       <img src="https://www.philippineairlines.com/en/~/media/aircraft-desktop/a321-desk.jpg">
-     </div>-->
+     <div class="card-image">
+       <img src="img/flight.png">
+     </div>
      <div class="card-stacked">
-       <div class="card-content">
-         <strong>{{ flight.Departure.AirportCode | getAirportName }}</strong> ({{flight.MarketingCarrier.AirlineID}} {{flight.MarketingCarrier.FlightNumber}}) </span>
+       <div class="card-content ">
+
+         <strong><span class="card-title">{{flight.Departure.AirportCode | getAirportName }} ({{ flight.Departure.AirportCode }})</span></strong>
+           <p>Flugnummer: {{flight.MarketingCarrier.AirlineID}} {{flight.MarketingCarrier.FlightNumber}}</p>
            <p>Flugzeugtyp: {{flight.Equipment.AircraftCode}}</p>
-           <p>{{flight.Arrival.ScheduledTimeLocal.DateTime}}</p>
+           <p>Ankunft: {{flight.Arrival.ScheduledTimeLocal.DateTime}}</p>
            <p>Operated by {{ flight.MarketingCarrier.AirlineID | getAirline }}</p>
        </div>
        <div class="card-action">
@@ -22,6 +24,8 @@
          <a ng-if="flight.FlightStatus.Code=='NO'" style="color:black">{{flight.FlightStatus.Definition}}</a>
          <a ng-if="flight.FlightStatus.Code=='LD'" style="color:green">{{flight.FlightStatus.Definition}}</a>
          <a ng-if="flight.FlightStatus.Code=='FE' || flight.FlightStatus.Code=='NI' || flight.FlightStatus.Code=='NA'" style="color:black">{{flight.FlightStatus.Definition}}</a>
+         <a href="#">Ursprungsland: {{ flight.Departure.AirportCode | getCountryNameByIATA }}</a>
+
        </div>
      </div>
    </div>

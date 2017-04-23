@@ -11,7 +11,7 @@
                <span class="card-title">{{flight.Arrival.AirportCode}} ({{flight.MarketingCarrier.AirlineID}} {{flight.MarketingCarrier.FlightNumber}}) </span>
                  <p>Flugzeugtyp: {{flight.Equipment.AircraftCode}}</p>
                  <p>{{flight.Arrival.ScheduledTimeLocal.DateTime}}</p>
-                 <p>Operated by {{ flight.MarketingCarrier.AirlineID | getAirline }}</p>
+                 <p>Operated by {{ flight.MarketingCarrier.AirlineID}}</p>
 
              </div>
              <div class="card-action">

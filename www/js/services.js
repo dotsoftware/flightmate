@@ -24,8 +24,6 @@ angular.module('app.services', [])
   };
 })
 
-
-
 .factory('FlightService', function($http, $window) {
 
   var access_token;
@@ -35,6 +33,7 @@ angular.module('app.services', [])
   // preloaded data
   var airlines;
   var airports;
+  var iso_countries;
 
   var BASE_URL = "https://api.lufthansa.com/v1";
 
@@ -53,15 +52,20 @@ angular.module('app.services', [])
   function loadCityNames() {
 
     $http.get("airports.json").success(function(data) {
-      console.log(data);
       airports = data;
 
-      console.log(airports[0].name)
+    });
+  }
+
+  function loadCountriesIso() {
+    $http.get("iso_countries.json").success(function(data) {
+      iso_countries = data;
     });
   }
 
   loadAirlines();
   loadCityNames();
+  loadCountriesIso();
 
   // reauthenticate if no token available
   function reAuth() {
@@ -108,9 +112,6 @@ angular.module('app.services', [])
            };
 
         $window.sessionStorage.token = data.access_token;
-
-        console.log("auth in service:");
-        console.log(data);
      })
      .error(function(err) {
          console.log(err);
@@ -164,6 +165,25 @@ angular.module('app.services', [])
     getCityByCode: function(code) {
       return airports.filter(
         function(airports) { return airports.iata == code });
+    },
+
+    getCountryByISO: function(iso) {
+      return iso_countries.filter(
+        function(airports) { return airports.iso == iso });
+    },
+
+    getCountryIsoByIATA: function(airport) {
+      var airport_iso;
+
+      airport_iso = airports.filter(
+        function(airports) { return airports.iata == airport })[0].iso;
+
+        return iso_countries.filter(
+          function(iso_countries) {
+            // console.log(iso_countries.Code + " -> " + airport_iso);
+            return iso_countries.Code == airport_iso;
+         });
+
     },
 
     getDepartures: function(from, datetime, limit) {
