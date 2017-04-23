@@ -15,7 +15,8 @@
          <strong><span class="card-title">{{flight.Departure.AirportCode | getAirportName }} ({{ flight.Departure.AirportCode }})</span></strong>
            <p>Flugnummer: {{flight.MarketingCarrier.AirlineID}} {{flight.MarketingCarrier.FlightNumber}}</p>
            <p>Flugzeugtyp: {{flight.Equipment.AircraftCode}}</p>
-           <p>Ankunft: {{flight.Arrival.ScheduledTimeLocal.DateTime}}</p>
+           <p>Avisierte Ankunft: {{flight.Arrival.ScheduledTimeLocal.DateTime | formatDate }}</p>
+           <p ng-if="flight.Arrival.EstimatedTimeLocal.DateTime.length > 0" style="color:red">Geplante Ankunft: {{flight.Arrival.EstimatedTimeLocal.DateTime | formatDate }}</p>
            <p>Operated by {{ flight.MarketingCarrier.AirlineID | getAirline }}</p>
        </div>
        <div class="card-action">

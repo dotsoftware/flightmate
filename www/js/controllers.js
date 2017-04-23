@@ -36,16 +36,34 @@ angular.module('app.controllers', [])
   }
 })
 
+.filter("formatDate", function($filter) {
+  return function(date) {
+    return $filter('date')(date, "dd.MM.yyyy HH:mm"); //yyyy-MM-ddTHH:mm"
+  }
+})
+
 .controller('abflugCtrl', ['$scope', '$stateParams', '$filter', 'FlightService', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams, $filter, FlightService) {
-  var date = new Date();
 
-  FlightService.getDepartures(FlightService.getAirport(), $filter('date')(date, "yyyy-MM-ddTHH:mm"), 50).success(function(data) {
-    console.log(data);
-    $scope.flights = data.FlightStatusResource.Flights.Flight;
-  })
+  function loadDepartures() {
+    var date = new Date();
+
+    FlightService.getDepartures(FlightService.getAirport(), $filter('date')(date, "yyyy-MM-ddTHH:mm"), 50).success(function(data) {
+      console.log(data);
+      $scope.flights = data.FlightStatusResource.Flights.Flight;
+    });
+  }
+
+  loadDepartures();
+
+
+  $scope.refreshDeparture = function() {
+    loadDepartures();
+    $scope.$broadcast('scroll.refreshComplete');
+  }
+
 }])
 
 .controller('ankunftCtrl', ['$scope', '$stateParams', '$filter', '$ionicLoading', 'FlightService', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
@@ -77,7 +95,7 @@ function ($scope, $stateParams, $filter, $ionicLoading, FlightService) {
      });
    }
 
-  
+
   $scope.refreshArrival = function() {
     loadArrivals();
   }

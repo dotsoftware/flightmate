@@ -3,8 +3,8 @@ angular.module('app.routes', [])
 .config(function($stateProvider, $urlRouterProvider) {
 
   function authenticate($location, FlightService) {
-    console.log("bin in auth");
-    console.log("token:" + FlightService.access_token);
+  //  console.log("bin in auth");
+    //console.log("token:" + FlightService.access_token);
 
     if(!angular.isDefined(FlightService.getToken())) {
       console.log("gehe zur startseite");
@@ -17,7 +17,7 @@ angular.module('app.routes', [])
     url: '/departures',
     views: {
       'menu': {
-        templateUrl: 'templates/abflug.html',
+        templateUrl: 'templates/abflug_funky.html',
         controller: 'abflugCtrl',
         resolve: { authenticate: authenticate }
       }

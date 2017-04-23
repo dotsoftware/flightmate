@@ -24,6 +24,9 @@
 
 
     <style type="text/css">
+      .myHeader {
+        background: #000 important!
+      }
       .platform-ios .manual-ios-statusbar-padding{
         padding-top:20px;
       }
@@ -70,7 +73,7 @@
   <body ng-app="app" animation="slide-left-right-ios7">
   <div>
   <div>
-    <ion-nav-bar class="bar-positive" cache-view="false">
+    <ion-nav-bar class="bar myHeader" cache-view="false">
       <ion-nav-back-button></ion-nav-back-button>
     </ion-nav-bar>
     <ion-nav-view></ion-nav-view>
