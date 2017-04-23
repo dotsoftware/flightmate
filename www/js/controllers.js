@@ -72,7 +72,7 @@ function ($scope, $stateParams, $filter, FlightService) {
 function ($scope, $stateParams, $filter, $ionicLoading, $ionicFilterBar, FlightService) {
 
   $ionicLoading.show({
-   template: 'Authentifizierung läuft'
+   template: 'Bitte warten...'
   });
 
  FlightService.auth().success(function(data) {
@@ -80,22 +80,24 @@ function ($scope, $stateParams, $filter, $ionicLoading, $ionicFilterBar, FlightS
    $ionicLoading.hide();
 
    loadArrivals();
+
  });
 
   function loadArrivals() {
      var date = new Date();
 
-     console.log("lade ankunft");
-
      FlightService.getArrivals(FlightService.getAirport(), $filter('date')(date, "yyyy-MM-ddTHH:mm")).success(function(data) {
-         console.log(data);
          $scope.flights = data.FlightStatusResource.Flights.Flight;
          $scope.$broadcast('scroll.refreshComplete');
 
+         console.log($scope.flights);
      });
+     $ionicLoading.hide();
+
    }
 
-   $scope.showFilterBar = function () {
+   // prepared for later
+   /*$scope.showFilterBar = function () {
      console.log($scope.flights);
      filterBarInstance = $ionicFilterBar.show({
        items: $scope.flights,
@@ -107,7 +109,7 @@ function ($scope, $stateParams, $filter, $ionicLoading, $ionicFilterBar, FlightS
          }
        }
      });
-   };
+   };*/
 
   $scope.refreshArrival = function() {
     loadArrivals();

@@ -9,7 +9,7 @@
      <div class="col s12 m7">
        <div class="card">
          <div class="card-image">
-           <img src="img/flight_wide.png">
+           <img src="img/flight_landing.png">
            <span class="card-title airportText">{{flight.Departure.AirportCode | getAirportName }} ({{ flight.Departure.AirportCode }})</span>
          </div>
          <div class="card-content">
@@ -21,12 +21,15 @@
            <p>Operated by {{ flight.MarketingCarrier.AirlineID | getAirline }}</p>
          </div>
          <div class="card-action">
-           <a ng-if="flight.FlightStatus.Code=='DP'" style="color:red">{{flight.FlightStatus.Definition}}</a>
-           <a ng-if="flight.FlightStatus.Code=='OT'" style="color:green">{{flight.FlightStatus.Definition}}</a>
-           <a ng-if="flight.FlightStatus.Code=='NO'" style="color:black">{{flight.FlightStatus.Definition}}</a>
-           <a ng-if="flight.FlightStatus.Code=='LD'" style="color:green">{{flight.FlightStatus.Definition}}</a>
-           <a ng-if="flight.FlightStatus.Code=='FE' || flight.FlightStatus.Code=='NI' || flight.FlightStatus.Code=='NA'" style="color:black">{{flight.FlightStatus.Definition}}</a>
-           <a href="#">Zielland: {{ flight.Departure.AirportCode | getCountryNameByIATA }}</a>
+           <a ng-if="flight.Arrival.TimeStatus.Code=='DP' || flight.Arrival.TimeStatus.Code=='DL'" style="color:red">{{flight.Arrival.TimeStatus.Definition}}</a>
+           <a ng-if="flight.Arrival.TimeStatus.Code=='OT'" style="color:green">{{flight.Arrival.TimeStatus.Definition}}</a>
+           <a ng-if="flight.Arrival.TimeStatus.Code=='NO'" style="color:black">{{flight.Arrival.TimeStatus.Definition}}</a>
+           <a ng-if="flight.Arrival.TimeStatus.Code=='LD'" style="color:green">{{flight.Arrival.TimeStatus.Definition}}</a>
+           <a ng-if="flight.Arrival.TimeStatus.Code=='FE' || flight.Arrival.TimeStatus.Code=='NI' || flight.Arrival.TimeStatus.Code=='NA'" style="color:black">{{flight.Arrival.TimeStatus.Definition}}</a>
+           <a style="color:black">Ursprungsland: {{ flight.Departure.AirportCode | getCountryNameByIATA }}</a>
+           <a ng-if="flight.Departure.Terminal.Gate.length > 0" style="color:black">Terminal: {{ flight.Departure.Terminal.Gate }}</a>
+
+
          </div>
        </div>
      </div>

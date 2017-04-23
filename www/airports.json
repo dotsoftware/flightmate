@@ -572,6 +572,17 @@
         "size": "small"
     },
     {
+        "iata": "ZRH",
+        "lon": "1111",
+        "iso": "CH",
+        "status": 1,
+        "name": "Zurich International Airport",
+        "continent": "EU",
+        "type": "airport",
+        "lat": "1111",
+        "size": "small"
+    },
+    {
         "iata": "AMY",
         "lon": "45.666668",
         "iso": "MG",
