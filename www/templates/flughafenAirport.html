@@ -11,7 +11,8 @@
   </ion-side-menu-content>
   <ion-side-menu side="left" id="menu">
     <ion-header-bar class="bar-dark">
-      <div class="title" ui-sref="flughafenAirport.flughafenAuswHlen" menu-close="">FlightMate ALPHA {{airport}}</div>
+      <div class="title" menu-close="">FlightMate ALPHA</div>
+      <div class="title" ui-sref="flughafenAirport.flughafenAuswHlen" menu-close="">{{airport | getAirportName}}</div>
     </ion-header-bar>
     <ion-content padding="false" class="side-menu-left has-header ">
       <ion-list>

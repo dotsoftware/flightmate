@@ -38,6 +38,28 @@
         "size": null
     },
     {
+        "iata": "LYS",
+        "lon": "1",
+        "iso": "FR",
+        "status": 1,
+        "name": "Lyon Saint-Exupéry Airport",
+        "continent": "EU",
+        "type": "airport",
+        "lat": "1",
+        "size": "small"
+    },
+    {
+        "iata": "KSC",
+        "lon": "1",
+        "iso": "SK",
+        "status": 1,
+        "name": "Košice Airport",
+        "continent": "EU",
+        "type": "airport",
+        "lat": "1",
+        "size": "small"
+    },
+    {
         "iata": "WKK",
         "lon": "-158.61111",
         "iso": "US",

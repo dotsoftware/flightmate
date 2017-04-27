@@ -29,6 +29,7 @@ angular.module('app.services', [])
   var access_token;
   var client_id = "ypmd2w7dmmbeecdekft2f5t7";
   var client_secret = "Zn3zKQdZbH";
+  var currentAirport = "VIE";
 
   // preloaded data
   var airlines;
@@ -91,6 +92,10 @@ angular.module('app.services', [])
       return access_token;
     },
 
+    getCurrentAirport: function() {
+      return current_airport;
+    },
+
     auth: function() {
 
      var config = {
@@ -130,7 +135,7 @@ angular.module('app.services', [])
 
     },
 
-    getAirport: function() {
+    getCurrentAirport: function() {
       if(!this.currentAirport) this.currentAirport = "VIE";
       return this.currentAirport;
     },
