@@ -21,11 +21,11 @@
 
             </div>
             <div class="card-action">
-              <a ng-if="flight.FlightStatus.Code=='DP' || flight.FlightStatus.Code=='DL'" style="color:red">{{flight.FlightStatus.Definition}}</a>
-              <a ng-if="flight.FlightStatus.Code=='OT'" style="color:green">{{flight.FlightStatus.Definition}}</a>
-              <a ng-if="flight.FlightStatus.Code=='NO'" style="color:black">{{flight.FlightStatus.Definition}}</a>
-              <a ng-if="flight.FlightStatus.Code=='LD'" style="color:green">{{flight.FlightStatus.Definition}}</a>
-              <a ng-if="flight.FlightStatus.Code=='FE' || flight.FlightStatus.Code=='NI' || flight.FlightStatus.Code=='NA'" style="color:black">{{flight.FlightStatus.Definition}}</a>
+              <a ng-if="flight.Departure.TimeStatus.Code=='DP' || flight.Departure.TimeStatus.Code=='DL'" style="color:red">{{flight.Departure.TimeStatus.Definition}}</a>
+              <a ng-if="flight.Departure.TimeStatus.Code=='OT'" style="color:green">{{flight.Departure.TimeStatus.Definition}}</a>
+              <a ng-if="flight.Departure.TimeStatus.Code=='NO'" style="color:black">{{flight.Departure.TimeStatus.Definition}}</a>
+              <a ng-if="flight.Departure.TimeStatus.Code=='LD'" style="color:green">{{flight.Departure.TimeStatus.Definition}}</a>
+              <a ng-if="flight.Departure.TimeStatus.Code=='FE' || flight.Departure.TimeStatus.Code=='NI' || flight.Departure.TimeStatus.Code=='NA'" style="color:black">{{flight.Departure.TimeStatus.Definition}}</a>
               <a style="color:black">Zielland: {{ flight.Arrival.AirportCode | getCountryNameByIATA }}</a>
               <a ng-if="flight.Departure.Terminal.Name.length > 0">Terminal: {{ flight.Departure.Terminal.Name }}</a>
             </div>

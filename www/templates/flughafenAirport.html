@@ -11,21 +11,20 @@
   </ion-side-menu-content>
   <ion-side-menu side="left" id="menu">
     <ion-header-bar class="bar-dark">
-      <div class="title" menu-close="">FlightMate ALPHA</div>
       <div class="title" ui-sref="flughafenAirport.flughafenAuswHlen" menu-close="">{{airport | getAirportName}}</div>
     </ion-header-bar>
-    <ion-content padding="false" class="side-menu-left has-header ">
+    <ion-content padding="false" class="side-menu-left has-header">
       <ion-list>
         <ion-item class="item-icon-left"  ui-sref="flughafenAirport.ankunft" menu-close="">
           <i class="icon ion-arrow-down-c"></i>Ankünfte</ion-item>
         <ion-item class="item-icon-left" ui-sref="flughafenAirport.abflug" menu-close="">
           <i class="icon ion-arrow-up-c"></i>Abflüge</ion-item>
-        <ion-item class="item-icon-left" ui-sref="flughafenAirport.fluginformation" menu-close="">
-          <i class="icon ion-information-circled"></i>Fluginformationen</ion-item>
+        <!--<ion-item class="item-icon-left" ui-sref="flughafenAirport.fluginformation" menu-close="">
+          <i class="icon ion-information-circled"></i>Fluginformationen</ion-item>-->
         <ion-item class="item-icon-left" ui-sref="flughafenAirport.lounges" menu-close="">
           <i class="icon ion-coffee"></i>Lounges</ion-item>
-        <ion-item class="item-icon-left"  ui-sref="flughafenAirport.verbindungSuchen" menu-close="">
-          <i class="icon ion-search"></i>Verbindung suchen</ion-item>
+      <!--  <ion-item class="item-icon-left"  ui-sref="flughafenAirport.verbindungSuchen" menu-close="">
+          <i class="icon ion-search"></i>Verbindung suchen</ion-item>  -->
       </ion-list>
     </ion-content>
   </ion-side-menu>

@@ -192,24 +192,13 @@ angular.module('app.services', [])
     },
 
     getDepartures: function(from, datetime, limit) {
-      console.log(from + "/" + datetime + "/" + limit);
-      //https://api.lufthansa.com/v1/operations/flightstatus/departures/VIE/2017-03-27T21:08
-
       return $http.get(BASE_URL + "/operations/flightstatus/departures/" + from + "/" + datetime, auth_header);
 
     },
 
     getFlightSchedules: function(from, to, datetime, direct) {
 
-      $http.get(BASE_URL + "/operations/schedules/" + from + "/" + to + "/" + datetime + "?directFlights=" + direct, auth_header).success(function(data) {
-        console.log(data);
-
-        return data;
-
-      }).catch(function(error) {
-        console.log(error);
-      });
-
+      return $http.get(BASE_URL + "/operations/schedules/" + from + "/" + to + "/" + datetime + "?directFlights=" + direct, auth_header);
 
     },
 

@@ -91,6 +91,39 @@
         "size": "small"
     },
     {
+        "iata": "LJU",
+        "lon": "1",
+        "iso": "SI",
+        "status": 1,
+        "name": "Ljubljana Jože Pučnik Airport",
+        "continent": "EU",
+        "type": "airport",
+        "lat": "1",
+        "size": "small"
+    },
+    {
+        "iata": "NAP",
+        "lon": "1",
+        "iso": "IT",
+        "status": 1,
+        "name": "Neapel Airport",
+        "continent": "EU",
+        "type": "airport",
+        "lat": "1",
+        "size": "small"
+    },
+    {
+        "iata": "KRK",
+        "lon": "1",
+        "iso": "PL",
+        "status": 1,
+        "name": "Krakow Airport",
+        "continent": "NA",
+        "type": "airport",
+        "lat": "1",
+        "size": "small"
+    },
+    {
         "iata": "ABP",
         "lon": "141.1",
         "iso": "PG",

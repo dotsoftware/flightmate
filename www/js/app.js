@@ -5,32 +5,12 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.directives','app.services','jett.ionic.filter.bar','ionic-material', 'ionic-datepicker'])
+angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.directives','app.services','jett.ionic.filter.bar','ionic-material', 'ion-datetime-picker'])
 
-.config(function($ionicConfigProvider, $sceDelegateProvider, ionicDatePickerProvider){
+.config(function($ionicConfigProvider, $sceDelegateProvider){
 
 
   $sceDelegateProvider.resourceUrlWhitelist([ 'self','*://www.youtube.com/**', '*://player.vimeo.com/video/**']);
-
-  var datePickerObj = {
-      inputDate: new Date(),
-      titleLabel: 'Datum auswählen',
-      setLabel: 'Setzen',
-      todayLabel: 'Heute',
-      closeLabel: 'Schließen',
-      mondayFirst: true,
-      weeksList: ["S", "M", "D", "M", "D", "F", "S"],
-      monthsList: ["Jänner", "Feb", "März", "April", "Mai", "Juni", "Juli", "Aug", "Sept", "Okt", "Nov", "Dez"],
-      templateType: 'popup',
-      from: new Date(2017, 8, 1),
-      to: new Date(2022, 8, 1),
-      showTodayButton: true,
-      dateFormat: 'dd MMMM yyyy',
-      closeOnSelect: false,
-      disableWeekdays: []
-    };
-
-    ionicDatePickerProvider.configDatePicker(datePickerObj);
 
 })
 

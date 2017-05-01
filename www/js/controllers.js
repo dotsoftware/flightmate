@@ -190,36 +190,26 @@ function ($scope, $stateParams, $ionicPopup, FlightService, geoProvider) {
 
 }])
 
-.controller('verbindungSuchenCtrl', ['$scope', '$stateParams', 'ionicDatePicker', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('verbindungSuchenCtrl', ['$scope', '$stateParams', '$filter', 'FlightService', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams, ionicDatePicker) {
+function ($scope, $stateParams, $filter,FlightService) {
 
-  var ipObj1 = {
-     callback: function (val) {  //Mandatory
-       console.log('Return value from the datepicker popup is : ' + val, new Date(val));
-     },
-     disabledDates: [            //Optional
-       new Date(2016, 2, 16),
-       new Date(2015, 3, 16),
-       new Date(2015, 4, 16),
-       new Date(2015, 5, 16),
-       new Date('Wednesday, August 12, 2015'),
-       new Date("08-16-2016"),
-       new Date(1439676000000)
-     ],
-     from: new Date(2012, 1, 1), //Optional
-     to: new Date(2016, 10, 30), //Optional
-     inputDate: new Date(),      //Optional
-     mondayFirst: true,          //Optional
-     disableWeekdays: [0],       //Optional
-     closeOnSelect: false,       //Optional
-     templateType: 'modal'       //Optional
-   };
+  $scope.form = {};
+  $scope.form.date = new Date();
 
-   $scope.openDatePicker = function(){
-     ionicDatePicker.openDatePicker(ipObj1);
-   };
+
+
+  $scope.search = function() {
+    console.log($scope.form.date );
+    console.log($filter('date')($scope.form.date , "yyyy-MM-dd"));
+
+    FlightService.getFlightSchedules($scope.form.from,$scope.form.to,$filter('date')($scope.form.date, "yyyy-MM-dd"), false).success(function(data) {
+      // data.FlightStatusResource.Flights.Flight;
+      console.log(data.ScheduleResource.Schedule);
+      $scope.flights = data.ScheduleResource.Schedule;
+    });
+  }
 
 
 }])

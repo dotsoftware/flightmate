@@ -1,0 +1,32 @@
+## README
+
+1.	Allgemeines & Setup
+	a.	Es handelt sich bei FlightMate um eine auf Basis von NodeJS betriebene Webapplikation. Für die Ausführung sind folgende Komponenten nötig:
+		-	Ionic Framework
+		-	Cordova Framework
+		-	NPM
+		-	Express
+	b.	Anstatt sich die Umgebung lokal aufzusetzen, ist es zielführender, die Applikation auf Heroku zu publizieren oder die
+  bereits publizierte Version unter http://flightmate.herokuapp.com zu betrachten
+
+2.	Hinweise zu den Funktionen
+	a.	Beim Aufruf von http://flightmate.herokuapp.com wird man immer auf http://flightmate.herokuapp.com/menu/arrival weitergeleitet.
+      Diese ist als Standardseite definiert und auch die Authentifikation mit der OpenLufthansa API findet auf dieser Seite statt.
+      Es dauert daher kurz, bis die Seite geladen ist. Zur Überbrückung wird ein kurzer Ladebalken angezeigt.
+	b.	Die Navigation findet über das Seitenmenü statt. Dort kann man auf die Reiter Ankunft, Abflug und Lounges wechseln.
+	c.	Diese drei Unterseiten laden automatisch, sobald sie geöffnet werden. Ankunft und Abflug verfügen über ein sogenanntes Pull-to-refresh-Menü.
+      Das bedeutet, man kann die Seite aktualisieren, indem man mit der Maus oder mit dem Finger den Bildschirm hinunterzieht.
+	d.	In der Unterseite Ankunft und Abflug werden einzelne Karten mit den jeweiligen Informationen angezeigt.
+      Der Titel setzt sich aus dem Langnamen des Flughafens und dessen IATA-Kürzel zusammen.
+      Dies funktioniert mit Lookup-JSON-Dateien. Ist der Flughafen allerdings weniger bekannt, sodass dieser nicht in der Datei enthalten ist, so steht ausschließlich das Kürzel des Flughafens im Titel.
+	e.	Der Status der Flüge wird direkt von der Schnittstelle geliefert. „NO STATUS“ bedeutet nicht, dass ein Fehler vorliegt, sondern nur, dass kein besonderer Status verfügbar ist.
+	f.	Die Anzeige von Terminals und Gates in den Karten sind davon abhängig, ob schon Daten dazu verfügbar sind. Verneinendenfalls wird nichts angezeigt.
+	g.	Klickt man im Seitenmenü auf FlightMate, wechselt man zur Auswahl der Flughäfen.
+      Dabei werden die nächsten Flughäfen vom aktuellen Standort angezeigt. Beim Klick auf einen solchen wechselt die App den Standort und zeigt fortan alle Ankünfte
+      und Abflüge an, die von jenem Flughafen ausgehen. Die Anzeige im Seitenmenü aktualisiert sich erst nachträglich (Bug).
+      Wichtig in diesem Zusammenhang: Kleinstflughäfen wie Linz sind nicht im Umfang der Lufthansa-API abedeckt. Nahe Wien funktionieren ledlich Schwechat und Budapest.
+      Zum Aktualisieren muss man das Pull-to-refresh System nutzen
+
+3. Uptime
+  a. Die App funktioniert nur, solange die OpenLufthansa-API ordnungsgemäß funktioniert. Am 30.4.2017 beispielsweise hatte Lufthansa ein Problem mit der Token-Ausstellung,
+     wodurch nichts mehr funktionierte. Sollte das der Fall sein, bitte einfach einen Tag abwarten.
