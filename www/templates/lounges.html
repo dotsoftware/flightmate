@@ -1,6 +1,41 @@
 <ion-view title="Lounges" id="page5" style="background-color:#E3E3E3;">
   <ion-content padding="true" class="has-header">
+
     <div class="row" ng-repeat="lounge in lounges">
+      <div class="col s12 m7">
+        <div class="card">
+          <div class="card-image">
+            <img src="img/cafe.jpg">
+            <span class="card-title airportText">{{lounge.Names.Name[0].$}}</span>
+          </div>
+          <div class="card-content">
+            <span class="card-title"></span>
+            <p>Standort: {{lounge.Locations.Location[0].$}}</p>
+            <p>Öffnungszeiten: {{lounge.OpeningHours.OpeningHours[0].$}}</p>
+
+          </div>
+          <div class="card-action" style="text-align:center">
+            <a ng-click="showHint('Kopierer')" class="icon ion-ios-copy" style="color:#000;font-size:30px" ng-if="lounge.Features.CopyMachine"></a>
+            <a ng-click="showHint('Fernseher verfügbar')" class="icon ion-ios-monitor" style="color:#000;font-size:30px" ng-if="lounge.Features.TV"></a>
+            <a ng-click="showHint('WLAN verfügbar')" class="icon ion-wifi" style="color:#000;font-size:30px" ng-if="lounge.Features.WLANFacility"></a>
+            <a ng-click="showHint('Meetingräume')" class="icon ion-ios-people" style="color:#000;font-size:30px" ng-if="lounge.Features.MeetingRooms"></a>
+            <a ng-click="showHint('Drucker verfügbar')" class="icon ion-printer" style="color:#000;font-size:30px" ng-if="lounge.Features.MAMPrinter"></a>
+            <a ng-click="showHint('PC mit Internetzugriff')" class="icon ion-android-desktop" style="color:#000;font-size:30px" ng-if="lounge.Features.PCWithInternetAccess"></a>
+            <a ng-click="showHint('Nichtraucher-Lounge')" class="icon ion-no-smoking" style="color:#000;font-size:30px" ng-if="lounge.Features.NonSmokingLounge"></a>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row" ng-repeat="lounge in lounges">
+      <div class="card-image">
+        <img src="img/cafe.jpg">
+        <span class="card-title airportText">{{flight.Arrival.AirportCode | getAirportName }} ({{ flight.Arrival.AirportCode }})</span>
+      </div>
        <div class="col s12 m6">
          <div class="card white lighten-5">
            <div class="card-content black-text">
