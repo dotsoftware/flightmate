@@ -1,5 +1,7 @@
 <ion-view title="Ankunft" style="background-color:#E3E3E3;">
-
+  <ion-nav-buttons side="secondary">
+  <button class="button button-icon button-clear ion-refresh" ng-click="refreshArrival()"></button>
+</ion-nav-buttons>
   <ion-content padding="true" class="has-header" overflow-scroll="true">
 
     <ion-refresher pulling-text="Aktualisieren" on-refresh="refreshArrival()">

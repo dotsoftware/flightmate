@@ -102,6 +102,17 @@
         "size": "small"
     },
     {
+        "iata": "SAW",
+        "lon": "1",
+        "iso": "TR",
+        "status": 1,
+        "name": "Istanbul-Sabiha Gökçen Airport",
+        "continent": "EU",
+        "type": "airport",
+        "lat": "1",
+        "size": "small"
+    },
+    {
         "iata": "NAP",
         "lon": "1",
         "iso": "IT",

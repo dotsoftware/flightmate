@@ -43,10 +43,10 @@ angular.module('app.controllers', [])
   }
 })
 
-.controller('abflugCtrl', ['$scope', '$stateParams', '$filter', 'FlightService', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('abflugCtrl', ['$scope', '$stateParams', '$filter', 'FlightService', 'ionicToast', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams, $filter, FlightService) {
+function ($scope, $stateParams, $filter, FlightService, ionicToast) {
 
   function loadDepartures() {
     var date = new Date();
@@ -62,15 +62,16 @@ function ($scope, $stateParams, $filter, FlightService) {
 
   $scope.refreshDeparture = function() {
     loadDepartures();
+    ionicToast.show('Ladevorgang abgeschlossen', 'bottom', false, 2500);
     $scope.$broadcast('scroll.refreshComplete');
   }
 
 }])
 
-.controller('ankunftCtrl', ['$scope', '$stateParams', '$filter', '$ionicLoading', '$ionicFilterBar', 'FlightService', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('ankunftCtrl', ['$scope', '$stateParams', '$filter', '$ionicLoading', '$ionicFilterBar', 'FlightService', 'ionicToast', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams, $filter, $ionicLoading, $ionicFilterBar, FlightService) {
+function ($scope, $stateParams, $filter, $ionicLoading, $ionicFilterBar, FlightService,ionicToast) {
 
   $ionicLoading.show({
    template: 'Bitte warten...'
@@ -90,7 +91,7 @@ function ($scope, $stateParams, $filter, $ionicLoading, $ionicFilterBar, FlightS
      FlightService.getArrivals(FlightService.getCurrentAirport(), $filter('date')(date, "yyyy-MM-ddTHH:mm")).success(function(data) {
          $scope.flights = data.FlightStatusResource.Flights.Flight;
          $scope.$broadcast('scroll.refreshComplete');
-
+         ionicToast.show('Ladevorgang abgeschlossen', 'bottom', false, 2500);
          console.log($scope.flights);
      });
      $ionicLoading.hide();

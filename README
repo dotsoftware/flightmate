@@ -34,6 +34,7 @@
 	b.	Die Navigation findet über das Seitenmenü statt. Dort kann man auf die Reiter "Ankunft", "Abflug" und "Lounges" wechseln.
 	c.	Diese drei Unterseiten laden automatisch, sobald sie geöffnet werden. "Ankunft" und "Abflug" verfügen über ein sogenanntes Pull-to-refresh-Menü.
       Das bedeutet, man kann die Seite aktualisieren, indem man mit der Maus oder mit dem Finger den Bildschirm hinunterzieht.
+			Die Aktualisierung kann auch über den Refresh-Button in der rechten oberen Ecke erfolgen.
 	d.	In der Unterseite Ankunft und Abflug werden einzelne Karten mit den jeweiligen Informationen angezeigt.
       Der Titel setzt sich aus dem Langnamen des Flughafens und dessen IATA-Kürzel zusammen.
       Dies funktioniert mit Lookup-JSON-Dateien. Ist der Flughafen allerdings weniger bekannt, sodass dieser nicht in der Datei enthalten ist, so steht ausschließlich das Kürzel des Flughafens im Titel.
